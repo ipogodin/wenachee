@@ -1,0 +1,65 @@
+/**
+ * Schedule for July 1–6, 2026. Edit freely.
+ * @typedef {{ time: string, title: string, emoji: string, note?: string }} Activity
+ * @typedef {{ date: string, label: string, activities: Activity[] }} Day
+ * @type {Day[]}
+ */
+export const SCHEDULE = [
+  {
+    date: '2026-07-01',
+    label: 'Wed · Jul 1',
+    activities: [
+      { time: '2:00 PM', title: 'Arrival & Camp Setup', emoji: '⛺' },
+      { time: '5:00 PM', title: 'Welcome Drinks at the Lake', emoji: '🍺' },
+      { time: '7:30 PM', title: 'Group Dinner & Bonfire', emoji: '🔥' },
+    ],
+  },
+  {
+    date: '2026-07-02',
+    label: 'Thu · Jul 2',
+    activities: [
+      { time: '8:00 AM', title: 'Breakfast', emoji: '🍳' },
+      { time: '10:00 AM', title: 'River Float', emoji: '🛶', note: 'Bring your floaty' },
+      { time: '3:00 PM', title: 'Free Time / Swim', emoji: '🏊' },
+      { time: '7:00 PM', title: 'Dinner & Campfire Stories', emoji: '🔥' },
+    ],
+  },
+  {
+    date: '2026-07-03',
+    label: 'Fri · Jul 3',
+    activities: [
+      { time: '8:00 AM', title: 'Breakfast', emoji: '🍳' },
+      { time: '10:00 AM', title: 'Hiking — Dirtyface Peak Trail', emoji: '🥾' },
+      { time: '4:00 PM', title: 'Lake Kayaking', emoji: '🚣' },
+      { time: '8:00 PM', title: 'Fireworks Eve Bonfire', emoji: '🎇' },
+    ],
+  },
+  {
+    date: '2026-07-04',
+    label: 'Sat · Jul 4 🎆',
+    activities: [
+      { time: '9:00 AM', title: 'Big Breakfast Cookout', emoji: '🥞' },
+      { time: '1:00 PM', title: 'Lake Day — Kayaks & Paddleboards', emoji: '🏄' },
+      { time: '6:00 PM', title: 'BBQ & 4th of July Feast', emoji: '🍖' },
+      { time: '9:30 PM', title: 'Fireworks on the Lake', emoji: '🎆' },
+    ],
+  },
+  {
+    date: '2026-07-05',
+    label: 'Sun · Jul 5',
+    activities: [
+      { time: '9:00 AM', title: 'Slow Morning / Coffee', emoji: '☕' },
+      { time: '11:00 AM', title: 'River Float — Chill Day', emoji: '🛶' },
+      { time: '3:00 PM', title: 'Volleyball & Lawn Games', emoji: '🏐' },
+      { time: '7:00 PM', title: 'Last Big Bonfire', emoji: '🔥' },
+    ],
+  },
+  {
+    date: '2026-07-06',
+    label: 'Mon · Jul 6',
+    activities: [
+      { time: '8:00 AM', title: 'Breakfast & Pack Up', emoji: '🍳' },
+      { time: '11:00 AM', title: 'Goodbye — Safe Travels!', emoji: '👋' },
+    ],
+  },
+];
