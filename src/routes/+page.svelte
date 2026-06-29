@@ -22,6 +22,7 @@
   <a href="#schedule">Schedule</a>
   <a href="#weather">Weather</a>
   <a href="#float">Float</a>
+  <a href="/games" class="games-link">🎮 Games</a>
 </nav>
 
 <Hero />
@@ -85,6 +86,15 @@
   .top-nav a:hover {
     color: #fff;
     background: rgba(255,255,255,0.1);
+  }
+
+  .top-nav .games-link {
+    color: #06d6a0;
+    border: 1px solid rgba(6,214,160,0.35);
+  }
+  .top-nav .games-link:hover {
+    background: rgba(6,214,160,0.15);
+    color: #06d6a0;
   }
 
   .site-footer {
