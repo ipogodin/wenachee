@@ -5,15 +5,20 @@
 
   let activeDay = $state(0);
 
-  const WMO = {
-    0: ['☀️', 'Clear'], 1: ['🌤', 'Mostly clear'], 2: ['⛅', 'Partly cloudy'],
-    3: ['☁️', 'Overcast'], 45: ['🌫', 'Foggy'], 48: ['🌫', 'Foggy'],
-    51: ['🌦', 'Light drizzle'], 53: ['🌦', 'Drizzle'], 55: ['🌧', 'Heavy drizzle'],
-    61: ['🌧', 'Light rain'], 63: ['🌧', 'Rain'], 65: ['🌧', 'Heavy rain'],
-    71: ['🌨', 'Light snow'], 73: ['❄️', 'Snow'], 75: ['❄️', 'Heavy snow'],
-    80: ['🌦', 'Showers'], 81: ['🌧', 'Heavy showers'], 82: ['⛈', 'Violent showers'],
-    95: ['⛈', 'Thunderstorm'], 96: ['⛈', 'Thunderstorm'], 99: ['⛈', 'Thunderstorm'],
-  };
+  function condition(shortForecast) {
+    const s = shortForecast?.toLowerCase() ?? '';
+    if (s.includes('thunder'))                                    return ['⛈',  shortForecast];
+    if (s.includes('snow') || s.includes('blizzard'))            return ['🌨',  shortForecast];
+    if (s.includes('fog'))                                        return ['🌫',  shortForecast];
+    if (s.includes('heavy rain') || s.includes('heavy shower'))  return ['🌧',  shortForecast];
+    if (s.includes('rain') || s.includes('shower') || s.includes('drizzle')) return ['🌦', shortForecast];
+    if (s.includes('mostly sunny') || s.includes('mostly clear')) return ['🌤', shortForecast];
+    if (s.includes('partly sunny') || s.includes('partly cloudy')) return ['⛅', shortForecast];
+    if (s.includes('mostly cloudy') || s.includes('considerable')) return ['🌥', shortForecast];
+    if (s.includes('cloudy') || s.includes('overcast'))          return ['☁️', shortForecast];
+    if (s.includes('sunny') || s.includes('clear'))              return ['☀️', shortForecast];
+    return ['🌡', shortForecast ?? 'Unknown'];
+  }
 
   // Build date → weather lookup
   let weatherMap = $derived(
@@ -48,7 +53,7 @@
         >
           <span class="tab-label">{day.label}</span>
           {#if w}
-            <span class="tab-weather">{WMO[w.weathercode]?.[0] ?? '🌡'} {Math.round(w.max)}°</span>
+            <span class="tab-weather">{condition(w.shortForecast)[0]} {Math.round(w.max)}°</span>
           {/if}
         </button>
       {/each}
@@ -57,14 +62,11 @@
     <!-- Weather summary for active day -->
     {#if dayWeather(SCHEDULE[activeDay].date)}
       {@const w = dayWeather(SCHEDULE[activeDay].date)}
-      {@const [emoji, label] = WMO[w.weathercode] ?? ['🌡', 'Unknown']}
+      {@const [emoji, label] = condition(w.shortForecast)}
       <div class="weather-bar">
         <span class="w-icon">{emoji}</span>
         <span class="w-label">{label}</span>
-        <span class="w-temps">↑ {Math.round(w.max)}° / ↓ {Math.round(w.min)}°F</span>
-        {#if w.precip > 0}
-          <span class="w-precip">💧 {w.precip.toFixed(1)} mm</span>
-        {/if}
+        <span class="w-temps">↑ {Math.round(w.max)}° / ↓ {w.min !== null ? Math.round(w.min) + '°' : '—'}F</span>
       </div>
     {/if}
 
