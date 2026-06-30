@@ -51,13 +51,7 @@
             <span class="site-num" style="background: {site.color}">{site.id}</span>
             <h3>Site {site.id}</h3>
           </div>
-          <div class="capacity-line">
-            {#if site.capacity}
-              <span>👥 {site.capacity} people</span>
-            {:else}
-              <span class="tbd">👥 Spots TBD</span>
-            {/if}
-          </div>
+
           <ul class="amenities">
             {#each site.amenities as a}
               <li>{a}</li>
@@ -236,16 +230,6 @@
     line-height: 1.2;
   }
 
-  .capacity-line {
-    font-size: 0.85rem;
-    opacity: 0.9;
-    margin-bottom: 0.8rem;
-  }
-
-  .tbd {
-    opacity: 0.5;
-    font-style: italic;
-  }
 
   .amenities {
     list-style: none;
