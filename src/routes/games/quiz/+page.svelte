@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { page } from '$app/stores';
   import { QUIZ } from '$lib/config/quiz.js';
 
@@ -77,11 +77,29 @@
   let result        = $state(null);   // 'correct' | 'wrong' | 'timeout' | null
   let timeLeft      = $state(TIME_PER_Q);
   let status        = $state('intro'); // 'intro' | 'playing' | 'won' | 'lost'
-  let timerActive   = $state(false);
   let hoveredOpt    = $state(null);
   let points        = $state(0);
   let punchText     = $state('');
   let failMessage   = $state('');   // shown on the game over card
+
+  let _intervalId = null;
+  function startTimer() {
+    clearInterval(_intervalId);
+    if (debug) return;
+    _intervalId = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        clearInterval(_intervalId);
+        _intervalId = null;
+        handleTimeout();
+      }
+    }, 1000);
+  }
+  function stopTimer() {
+    clearInterval(_intervalId);
+    _intervalId = null;
+  }
+  onDestroy(stopTimer);
 
   let q            = $derived(questions[questionIndex]);
   let hotspotSize  = $derived(q.hotspotSize ?? 21);
@@ -93,30 +111,16 @@
     hoveredOpt !== null ? q.options.find(o => o.id === hoveredOpt)?.hint : null
   );
 
-  $effect(() => {
-    if (!timerActive || debug) return;
-    const id = setInterval(() => {
-      timeLeft--;
-      if (timeLeft <= 0) {
-        clearInterval(id);
-        timerActive = false;
-        handleTimeout();
-      }
-    }, 1000);
-    return () => clearInterval(id);
-  });
-
-
   function startGame() {
     status = 'playing';
-    timerActive = true;
+    startTimer();
     theme?.play().catch(() => {});
   }
 
   function pick(optId) {
     if (selected !== null || result !== null) return;
     selected = optId;
-    timerActive = false;
+    stopTimer();
     hoveredOpt = null;
 
     const opt = q.options.find(o => o.id === optId);
@@ -151,7 +155,7 @@
       punchText = '';
       timeLeft = TIME_PER_Q;
       hoveredOpt = null;
-      timerActive = true;
+      startTimer();
     } else {
       status = 'won';
       theme?.pause();
@@ -170,7 +174,7 @@
     status = 'intro';
     hoveredOpt = null;
     points = 0;
-    timerActive = false;
+    stopTimer();
     theme?.pause();
     if (theme) theme.currentTime = 0;
   }
