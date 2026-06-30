@@ -66,9 +66,9 @@
   }
 
   function debugOrder(arr) {
-    const anya = arr.find(q => q.id === 'anya1');
-    const rest = arr.filter(q => q.id !== 'anya1');
-    return anya ? [anya, ...rest] : arr;
+    const luca = arr.find(q => q.id === 'luca1');
+    const rest = arr.filter(q => q.id !== 'luca1');
+    return luca ? [luca, ...rest] : arr;
   }
 
   let questions     = $state(debug ? debugOrder(QUIZ.questions) : shuffled(QUIZ.questions));

@@ -80,6 +80,19 @@ export const QUIZ = {
       ],
     },
     {
+      id: 'luca1',
+      image: '/quiz/wen_quiz_luca_1.png',
+      correctAnswer: 5,
+      timeoutMessage: "Luca has already moved on to the next construction site. You were too slow.",
+      options: [
+        { id: 1, label: 'Mommy',           hint: 'Mommy is always a top-tier choice — especially with the legendary blue hair.',              x: 20, y: 37, punch: "An excellent answer. But Luca's heart was distracted by something from the hardware aisle." },
+        { id: 2, label: 'Excavator + Milk', hint: 'A yellow excavator with a bottle of milk in the cab — construction and snack time combined.', x: 82, y: 38, punch: "A powerful combination: heavy machinery and milk. Still not Luca's ultimate obsession." },
+        { id: 3, label: 'Grandma',          hint: 'Grandma brings hugs, smiles, and the unmistakable purple-jacket energy.',                   x: 18, y: 78, punch: "Grandma is clearly a fan favorite. But even Grandma could not outcompete this answer." },
+        { id: 4, label: 'Laura',            hint: "Laura is Luca's nanny and aunt — an unfairly strong double-role advantage.",                 x: 82, y: 78, punch: "Nanny and aunt? That is an elite résumé. But Luca's answer is apparently more… industrial." },
+        { id: 5, label: 'Knife + Nails',    hint: 'A tiny foreman recognizes the essential ingredients of a serious construction project.',     x: 50, y: 86, punch: "Correct! Luca skipped ordinary baby hobbies and went directly into construction management. 🔨" },
+      ],
+    },
+    {
       id: 'sergii1',
       image: '/quiz/wen_quiz_sergii_1.png',
       correctAnswer: 2,
