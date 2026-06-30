@@ -86,6 +86,25 @@ Everything user-facing lives in `src/lib/config/games.js`:
 
 ---
 
+## Svelte coding standards
+
+When writing or reviewing Svelte code in this project, invoke the **Svelte best practices skill** before making changes:
+
+```
+/svelte-core-bestpractices
+```
+
+Key rules (full rationale in `docs/svelte-best-practices.md`):
+- Svelte 5 runes only: `$state`, `$derived`, `$effect`, `$props`, `$bindable`
+- `onclick=` not `on:click=`; `$props()` not `export let`
+- `$effect` only for external side-effects (Audio, DOM, Maps) — use `$derived` for computed values
+- Global CSS resets in `src/app.css`, not in component `<style>` blocks
+- Extract sub-components when a UI piece has >30 lines of its own CSS or appears in multiple places
+- Always key `{#each}` blocks: `{#each items as item (item.id)}`
+- Class conditions: `class={{ 'foo': condition }}` object syntax
+
+---
+
 ## Deploy
 
 ```bash

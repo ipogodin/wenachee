@@ -49,23 +49,6 @@
 </footer>
 
 <style>
-  :global(*) {
-    box-sizing: border-box;
-  }
-
-  :global(html) {
-    scroll-behavior: smooth;
-  }
-
-  :global(body) {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: #0d1b2a;
-    color: #fff;
-    -webkit-font-smoothing: antialiased;
-  }
-
   .top-nav {
     position: fixed;
     top: 0;
