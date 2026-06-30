@@ -10,12 +10,22 @@
 
   // ── Audio ──────────────────────────────────────────────────────
   let theme;
+  let winSfx;
+  let failSfxPool = [];
   let masterVolume = $state(0.7);
   let muted        = $state(false);
+
+  const FAIL_SOUNDS = [
+    '/sounds/wen_quiz_failed_1.mp3', '/sounds/wen_quiz_failed_2.mp3',
+    '/sounds/wen_quiz_failed_3.mp3', '/sounds/wen_quiz_failed_4.mp3',
+    '/sounds/wen_quiz_failed_5.mp3', '/sounds/wen_quiz_failed_6.mp3',
+  ];
 
   onMount(() => {
     theme = new Audio('/sounds/wen_quiz_theme.mp3');
     theme.loop = true;
+    winSfx = new Audio('/sounds/wen_quiz_win.mp3');
+    failSfxPool = FAIL_SOUNDS.map(src => new Audio(src));
     return () => { theme.pause(); };
   });
 
@@ -24,6 +34,21 @@
   });
 
   function toggleMute() { muted = !muted; }
+
+  function playWin() {
+    if (!winSfx) return;
+    winSfx.currentTime = 0;
+    winSfx.volume = muted ? 0 : masterVolume;
+    winSfx.play().catch(() => {});
+  }
+
+  function playFail() {
+    if (!failSfxPool.length) return;
+    const sfx = failSfxPool[Math.floor(Math.random() * failSfxPool.length)];
+    sfx.currentTime = 0;
+    sfx.volume = muted ? 0 : masterVolume;
+    sfx.play().catch(() => {});
+  }
 
   let volIcon = $derived(
     muted || masterVolume === 0 ? '🔇' : masterVolume < 0.45 ? '🔉' : '🔊'
@@ -85,6 +110,7 @@
       setTimeout(advance, 1800);
     } else {
       result = 'wrong';
+      playFail();
       setTimeout(() => { status = 'lost'; theme?.pause(); }, 1800);
     }
   }
@@ -92,6 +118,7 @@
   function handleTimeout() {
     result = 'timeout';
     punchText = q.timeoutMessage ?? "Time's up!";
+    playFail();
     setTimeout(() => { status = 'lost'; theme?.pause(); }, 1800);
   }
 
@@ -107,6 +134,7 @@
     } else {
       status = 'won';
       theme?.pause();
+      playWin();
     }
   }
 
