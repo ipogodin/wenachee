@@ -34,7 +34,7 @@
   let selected      = $state(null);   // option id | null
   let result        = $state(null);   // 'correct' | 'wrong' | 'timeout' | null
   let timeLeft      = $state(TIME_PER_Q);
-  let status        = $state('playing'); // 'playing' | 'won' | 'lost'
+  let status        = $state('intro'); // 'intro' | 'playing' | 'won' | 'lost'
   let timerActive   = $state(false);
   let hoveredOpt    = $state(null);
   let points        = $state(0);
@@ -62,9 +62,10 @@
     return () => clearInterval(id);
   });
 
-  onMount(() => { timerActive = true; });
 
-  function startTheme() {
+  function startGame() {
+    status = 'playing';
+    timerActive = true;
     theme?.play().catch(() => {});
   }
 
@@ -73,7 +74,6 @@
     selected = optId;
     timerActive = false;
     hoveredOpt = null;
-    startTheme();
 
     const opt = q.options.find(o => o.id === optId);
     punchText = opt?.punch ?? '';
@@ -114,10 +114,12 @@
     result = null;
     punchText = '';
     timeLeft = TIME_PER_Q;
-    status = 'playing';
+    status = 'intro';
     hoveredOpt = null;
     points = 0;
-    timerActive = true;
+    timerActive = false;
+    theme?.pause();
+    if (theme) theme.currentTime = 0;
   }
 
   function hotspotClasses(opt) {
@@ -199,6 +201,18 @@
     {/if}
   </div>
 </div>
+
+<!-- INTRO -->
+{#if status === 'intro'}
+  <div class="end-overlay">
+    <div class="end-card intro-card">
+      <div class="end-icon bob">🎯</div>
+      <h2 class="intro-title">Camp Quiz</h2>
+      <p class="intro-sub">How well do you know the crew?<br>Tap the right circle before time runs out.</p>
+      <button class="pill primary big" onclick={startGame}>Let's Go! →</button>
+    </div>
+  </div>
+{/if}
 
 <!-- WIN -->
 {#if status === 'won'}
@@ -416,6 +430,14 @@
   }
   .win-card  { background: #0d2137; border: 2px solid #06d6a0; }
   .lost-card { background: #1a0808; border: 2px solid #c53030; }
+
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  .bob { animation: bob 2.2s ease-in-out infinite; }
+
+  .intro-card { border-color: rgba(6,214,160,0.35); }
+  .intro-title { margin: 0 0 0.5rem; font-size: 1.7rem; font-weight: 900; color: #06d6a0; text-shadow: 0 0 20px rgba(6,214,160,0.4); }
+  .intro-sub { opacity: 0.7; font-size: 0.88rem; line-height: 1.5; margin: 0 0 1.6rem; }
+  .pill.big { padding: 0.7rem 2.2rem; font-size: 1rem; }
 
   .end-icon { font-size: 3rem; margin-bottom: 0.5rem; }
   .win-card h2  { margin: 0 0 0.4rem; font-size: 1.5rem; font-weight: 900; color: #06d6a0; }
