@@ -181,6 +181,8 @@
     margin-bottom: 1rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .day-tabs::-webkit-scrollbar { display: none; }
