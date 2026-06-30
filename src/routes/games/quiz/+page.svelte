@@ -40,7 +40,8 @@
   let points        = $state(0);
   let punchText     = $state('');
 
-  let q          = $derived(QUIZ.questions[questionIndex]);
+  let q            = $derived(QUIZ.questions[questionIndex]);
+  let hotspotSize  = $derived(q.hotspotSize ?? 21);
   let timerPct   = $derived(timeLeft / TIME_PER_Q);
   let timerColor = $derived(
     timerPct > 0.5 ? '#06d6a0' : timerPct > 0.25 ? '#ffd23f' : '#ff6b35'
@@ -84,14 +85,14 @@
       setTimeout(advance, 1800);
     } else {
       result = 'wrong';
-      setTimeout(() => { status = 'lost'; }, 1800);
+      setTimeout(() => { status = 'lost'; theme?.pause(); }, 1800);
     }
   }
 
   function handleTimeout() {
     result = 'timeout';
     punchText = q.timeoutMessage ?? "Time's up!";
-    setTimeout(() => { status = 'lost'; }, 1800);
+    setTimeout(() => { status = 'lost'; theme?.pause(); }, 1800);
   }
 
   function advance() {
@@ -105,6 +106,7 @@
       timerActive = true;
     } else {
       status = 'won';
+      theme?.pause();
     }
   }
 
@@ -176,7 +178,7 @@
       {#each q.options as opt (opt.id)}
         <button
           class={hotspotClasses(opt)}
-          style="left:{opt.x}%; top:{opt.y}%;"
+          style="left:{opt.x}%; top:{opt.y}%; width:{hotspotSize}%;"
           onmouseenter={() => { if (result === null) hoveredOpt = opt.id; }}
           onmouseleave={() => { hoveredOpt = null; }}
           onclick={() => pick(opt.id)}
