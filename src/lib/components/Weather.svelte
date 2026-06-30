@@ -1,38 +1,28 @@
 <script>
-  /** @type {{ forecast: import('./Weather.types.js').DayForecast[] | null, error: string | null }} */
   let { forecast = null, error = null } = $props();
 
-  const WMO = {
-    0: { label: 'Clear sky', emoji: '☀️' },
-    1: { label: 'Mainly clear', emoji: '🌤' },
-    2: { label: 'Partly cloudy', emoji: '⛅' },
-    3: { label: 'Overcast', emoji: '☁️' },
-    45: { label: 'Fog', emoji: '🌫' },
-    48: { label: 'Icy fog', emoji: '🌫' },
-    51: { label: 'Light drizzle', emoji: '🌦' },
-    53: { label: 'Drizzle', emoji: '🌦' },
-    55: { label: 'Heavy drizzle', emoji: '🌧' },
-    61: { label: 'Light rain', emoji: '🌧' },
-    63: { label: 'Rain', emoji: '🌧' },
-    65: { label: 'Heavy rain', emoji: '🌧' },
-    71: { label: 'Light snow', emoji: '🌨' },
-    80: { label: 'Rain showers', emoji: '🌦' },
-    81: { label: 'Rain showers', emoji: '🌦' },
-    82: { label: 'Heavy showers', emoji: '⛈' },
-    95: { label: 'Thunderstorm', emoji: '⛈' },
-    99: { label: 'Thunderstorm', emoji: '⛈' },
-  };
-
-  /** @param {number} code */
-  function wmo(code) {
-    return WMO[code] ?? { label: 'Variable', emoji: '🌡' };
-  }
-
   const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
   /** @param {string} dateStr */
   function dayLabel(dateStr) {
     const d = new Date(dateStr + 'T12:00:00');
     return DAYS[d.getDay()];
+  }
+
+  /** Map NWS shortForecast text → emoji + short label */
+  function condition(shortForecast) {
+    const s = shortForecast?.toLowerCase() ?? '';
+    if (s.includes('thunder'))                             return { emoji: '⛈',  label: shortForecast };
+    if (s.includes('snow') || s.includes('blizzard'))     return { emoji: '🌨',  label: shortForecast };
+    if (s.includes('fog'))                                 return { emoji: '🌫',  label: shortForecast };
+    if (s.includes('heavy rain') || s.includes('heavy shower')) return { emoji: '🌧', label: shortForecast };
+    if (s.includes('rain') || s.includes('shower') || s.includes('drizzle')) return { emoji: '🌦', label: shortForecast };
+    if (s.includes('mostly sunny') || s.includes('mostly clear'))  return { emoji: '🌤',  label: shortForecast };
+    if (s.includes('partly sunny') || s.includes('partly cloudy')) return { emoji: '⛅',  label: shortForecast };
+    if (s.includes('mostly cloudy') || s.includes('considerable')) return { emoji: '🌥',  label: shortForecast };
+    if (s.includes('cloudy') || s.includes('overcast'))            return { emoji: '☁️', label: shortForecast };
+    if (s.includes('sunny') || s.includes('clear'))                return { emoji: '☀️', label: shortForecast };
+    return { emoji: '🌡', label: shortForecast };
   }
 </script>
 
@@ -41,7 +31,7 @@
     <div class="section-header">
       <span class="tag">🌤 Weather Outlook</span>
       <h2>July Forecast</h2>
-      <p class="lead">Lake Wenatchee, WA · Live from Open-Meteo</p>
+      <p class="lead">Lake Wenatchee, WA · Live from weather.gov</p>
     </div>
 
     {#if error}
@@ -57,7 +47,7 @@
     {:else}
       <div class="forecast-row">
         {#each forecast as day}
-          {@const w = wmo(day.weathercode)}
+          {@const w = condition(day.shortForecast)}
           <div class="forecast-card">
             <p class="fc-day">{dayLabel(day.date)}</p>
             <p class="fc-date">{day.date.slice(5).replace('-','/')}</p>
@@ -65,11 +55,8 @@
             <p class="fc-desc">{w.label}</p>
             <div class="fc-temps">
               <span class="temp-hi">↑{Math.round(day.max)}°</span>
-              <span class="temp-lo">↓{Math.round(day.min)}°</span>
+              {#if day.min !== null}<span class="temp-lo">↓{Math.round(day.min)}°</span>{/if}
             </div>
-            {#if day.precip > 0}
-              <p class="fc-rain">💧 {day.precip.toFixed(2)}"</p>
-            {/if}
           </div>
         {/each}
       </div>

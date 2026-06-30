@@ -3,17 +3,31 @@ export async function load({ fetch }) {
   try {
     const res = await fetch('/api/weather');
     if (!res.ok) return { forecast: null };
-    const data = await res.json();
+    const periods = await res.json();
 
-    const forecast = data.daily?.time?.map((date, i) => ({
-      date,
-      max: data.daily.temperature_2m_max[i],
-      min: data.daily.temperature_2m_min[i],
-      precip: data.daily.precipitation_sum[i],
-      weathercode: data.daily.weathercode[i],
-    })) ?? null;
+    if (!Array.isArray(periods)) return { forecast: null };
 
-    return { forecast };
+    // NWS returns alternating daytime/nighttime periods.
+    // Pair them up into one entry per day.
+    const days = [];
+    for (let i = 0; i < periods.length; i++) {
+      const p = periods[i];
+      if (!p.isDaytime) continue;
+
+      const night = periods[i + 1] ?? null;
+      const dateStr = p.startTime.slice(0, 10); // "2026-07-01"
+
+      days.push({
+        date:          dateStr,
+        max:           p.temperature,
+        min:           night?.temperature ?? null,
+        shortForecast: p.shortForecast,
+        windSpeed:     p.windSpeed,
+        windDirection: p.windDirection,
+      });
+    }
+
+    return { forecast: days.length ? days : null };
   } catch {
     return { forecast: null };
   }
