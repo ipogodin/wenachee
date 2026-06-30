@@ -14,24 +14,27 @@ export const RIVER_CROSSING = {
   characters: [
     {
       id: 'A',
-      name: 'Camper A',        // ← replace with real name
-      image: null,              // ← replace with '/characters/person_a.png'
-      placeholder: 'A',
-      color: '#ff6b35',
+      name: 'Sofia',
+      role: 'wolf',
+      image: '/characters/sofia.png',
+      placeholder: 'S',
+      color: '#60a5fa',
     },
     {
       id: 'B',
-      name: 'Camper B',
-      image: null,
-      placeholder: 'B',
-      color: '#ffd23f',
+      name: 'Matt',
+      role: 'goat',
+      image: '/characters/matt.png',
+      placeholder: 'M',
+      color: '#fbbf24',
     },
     {
       id: 'C',
-      name: 'Camper C',
-      image: null,
-      placeholder: 'C',
-      color: '#06d6a0',
+      name: 'Greg',
+      role: 'cabbage',
+      image: '/characters/greg.png',
+      placeholder: 'G',
+      color: '#34d399',
     },
   ],
 

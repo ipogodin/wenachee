@@ -26,6 +26,16 @@
 </nav>
 
 <Hero />
+
+<a href="/games" class="games-cta">
+  <span class="games-cta-icon">🎮</span>
+  <span class="games-cta-text">
+    <strong>Camp Games are live!</strong>
+    <span>River Crossing puzzle + more coming — play now</span>
+  </span>
+  <span class="games-cta-arrow">→</span>
+</a>
+
 <CampingSites />
 <Schedule forecast={data.forecast} />
 <FireAlert />
@@ -96,6 +106,25 @@
     background: rgba(6,214,160,0.15);
     color: #06d6a0;
   }
+
+  .games-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(135deg, rgba(6,214,160,0.12) 0%, rgba(6,150,120,0.06) 100%);
+    border-top: 2px solid rgba(6,214,160,0.4);
+    border-bottom: 2px solid rgba(6,214,160,0.15);
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.2s;
+  }
+  .games-cta:hover { background: linear-gradient(135deg, rgba(6,214,160,0.2) 0%, rgba(6,150,120,0.1) 100%); }
+  .games-cta-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .games-cta-text { flex: 1; display: flex; flex-direction: column; gap: 0.1rem; }
+  .games-cta-text strong { font-size: 0.95rem; color: #06d6a0; }
+  .games-cta-text span { font-size: 0.78rem; opacity: 0.6; }
+  .games-cta-arrow { font-size: 1.2rem; color: #06d6a0; opacity: 0.7; }
 
   .site-footer {
     background: #060e18;
