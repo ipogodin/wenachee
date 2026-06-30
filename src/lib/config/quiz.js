@@ -54,6 +54,19 @@ export const QUIZ = {
       ],
     },
     {
+      id: 'mom1',
+      image: '/quiz/wen_quiz_mom1.png',
+      correctAnswer: 5,
+      timeoutMessage: "Mom is already thinking about everyone's comfort. You ran out of time doing the same.",
+      options: [
+        { id: 1, label: 'Nervously overthinking',               hint: 'She starts nervously overthinking',                   x: 15, y: 20, punch: "A strong sign, but Mom can overthink while completely relaxed too." },
+        { id: 2, label: 'Stress-eating everything in reach',    hint: 'She begins stress-eating everything in reach',        x: 12, y: 63, punch: "Possible, but this may simply mean there are cookies nearby." },
+        { id: 3, label: 'Quoting the greatest minds',          hint: 'She starts quoting the greatest minds of literature', x: 40, y: 85, punch: "A warning sign — but also potentially just a normal Tuesday." },
+        { id: 4, label: 'Cannot look you in the eye',          hint: 'She suddenly cannot look you in the eye',             x: 85, y: 30, punch: "Suspicious, but not definitive. Maybe she is looking for the next person to help." },
+        { id: 5, label: 'She is breathing',                    hint: 'She is breathing',                                    x: 82, y: 78, punch: "Correct. The moment Mom is awake and breathing, she is already thinking about everyone else's comfort." },
+      ],
+    },
+    {
       id: 'sergii1',
       image: '/quiz/wen_quiz_sergii_1.png',
       correctAnswer: 2,

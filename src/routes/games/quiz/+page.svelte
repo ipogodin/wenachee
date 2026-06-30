@@ -55,6 +55,22 @@
   );
 
   // ── Game state ──────────────────────────────────────────────────
+  function shuffled(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function debugOrder(arr) {
+    const mom = arr.find(q => q.id === 'mom1');
+    const rest = arr.filter(q => q.id !== 'mom1');
+    return mom ? [mom, ...rest] : arr;
+  }
+
+  let questions     = $state(debug ? debugOrder(QUIZ.questions) : shuffled(QUIZ.questions));
   let questionIndex = $state(0);
   let selected      = $state(null);   // option id | null
   let result        = $state(null);   // 'correct' | 'wrong' | 'timeout' | null
@@ -65,7 +81,7 @@
   let points        = $state(0);
   let punchText     = $state('');
 
-  let q            = $derived(QUIZ.questions[questionIndex]);
+  let q            = $derived(questions[questionIndex]);
   let hotspotSize  = $derived(q.hotspotSize ?? 21);
   let timerPct   = $derived(timeLeft / TIME_PER_Q);
   let timerColor = $derived(
@@ -76,7 +92,7 @@
   );
 
   $effect(() => {
-    if (!timerActive) return;
+    if (!timerActive || debug) return;
     const id = setInterval(() => {
       timeLeft--;
       if (timeLeft <= 0) {
@@ -123,7 +139,7 @@
   }
 
   function advance() {
-    if (questionIndex < QUIZ.questions.length - 1) {
+    if (questionIndex < questions.length - 1) {
       questionIndex++;
       selected = null;
       result = null;
@@ -139,6 +155,7 @@
   }
 
   function restart() {
+    questions = shuffled(QUIZ.questions);
     questionIndex = 0;
     selected = null;
     result = null;
@@ -250,7 +267,7 @@
     <div class="end-card win-card">
       <div class="end-icon">🏆</div>
       <h2>You nailed it!</h2>
-      <p>All {QUIZ.questions.length} questions correct!</p>
+      <p>All {questions.length} questions correct!</p>
       <div class="points-display">
         <span class="pts-num">+{points}</span>
         <span class="pts-label">points</span>
