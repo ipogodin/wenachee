@@ -107,15 +107,9 @@
 
   .forecast-row {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-  }
-
-  @media (max-width: 600px) {
-    .forecast-row {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
   .forecast-card {

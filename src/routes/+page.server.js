@@ -8,15 +8,19 @@ export async function load({ fetch }) {
     if (!Array.isArray(periods)) return { forecast: null };
 
     // NWS returns alternating daytime/nighttime periods.
-    // Pair them up into one entry per day.
+    // Pair them up into one entry per day, filtered to trip dates only.
+    const TRIP_START = '2026-07-01';
+    const TRIP_END   = '2026-07-05';
+
     const days = [];
     for (let i = 0; i < periods.length; i++) {
       const p = periods[i];
       if (!p.isDaytime) continue;
 
-      const night = periods[i + 1] ?? null;
-      const dateStr = p.startTime.slice(0, 10); // "2026-07-01"
+      const dateStr = p.startTime.slice(0, 10);
+      if (dateStr < TRIP_START || dateStr > TRIP_END) continue;
 
+      const night = periods[i + 1] ?? null;
       days.push({
         date:          dateStr,
         max:           p.temperature,
