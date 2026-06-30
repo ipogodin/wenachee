@@ -82,9 +82,8 @@ export const GAMES_HUB = {
       description: 'How well do you know the crew and the lake?',
       emoji: '❓',
       path: '/games/quiz',
-      available: false,
-      comingSoon: true,
-      maxPoints: 10,
+      available: true,
+      maxPoints: 40,
     },
   ],
 };
