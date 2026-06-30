@@ -25,6 +25,19 @@ export const QUIZ = {
       ],
     },
     {
+      id: 'alex1',
+      image: '/quiz/wen_quiz_alex1.png',
+      correctAnswer: 4,
+      timeoutMessage: "Alex is already halfway up the trail in his Crocs. You missed it.",
+      options: [
+        { id: 1, label: 'Hiking Boots',  hint: 'Proper hiking boots — sensible, sturdy, very not-Alex',         x: 18, y: 32, punch: "Reasonable. Responsible. Completely not Alex's answer." },
+        { id: 2, label: 'Headset',       hint: 'Noise-cancelling headset for blocking out bad vibes',           x: 82, y: 32, punch: "Useful for blocking wind, mosquitoes, and advice from people wearing real boots." },
+        { id: 3, label: 'Backpack',      hint: 'A backpack with seventeen unnecessary pockets',                 x: 18, y: 65, punch: "Alex respects organization — but not enough to carry 17 pockets uphill." },
+        { id: 4, label: 'Crocs',         hint: 'Crocs in Sport Mode™ — heel strap fully engaged',              x: 82, y: 65, punch: "When the heel strap is engaged, Alex becomes trail-certified. 🐊 Correct!" },
+        { id: 5, label: 'Ranger Hat',    hint: 'A hat that makes him look like a national-park ranger',         x: 50, y: 83, punch: "Good for shade. Not powerful enough to defeat the Crocs." },
+      ],
+    },
+    {
       id: 'sergii1',
       image: '/quiz/wen_quiz_sergii_1.png',
       correctAnswer: 2,

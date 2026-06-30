@@ -83,7 +83,7 @@ export const GAMES_HUB = {
       emoji: '❓',
       path: '/games/quiz',
       available: true,
-      maxPoints: 20,
+      maxPoints: 30,
     },
   ],
 };
