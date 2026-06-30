@@ -31,11 +31,11 @@ export const QUIZ = {
       hotspotSize: 14,
       timeoutMessage: "The headache is spreading. Illia's pharmacy has left the building.",
       options: [
-        { id: 1, label: 'Blue Cubes',         hint: 'Blue cubes of speed',                                   x: 17, y: 35, punch: "Incorrect. Illia may have energy, but it is mostly powered by logistics and mild panic." },
-        { id: 2, label: 'Potato Starch',       hint: 'Potato starch',                                        x: 20, y: 57, punch: "Incorrect. Useful for cooking. Less useful during a headache." },
-        { id: 3, label: 'Green Tobacco',       hint: 'Green tobacco',                                        x: 17, y: 83, punch: "Incorrect. Wrong pocket, wrong person, wrong survival strategy." },
-        { id: 4, label: 'Electrolyte Tablets', hint: 'Electrolyte tablets that look way too suspicious',     x: 80, y: 44, punch: "Close in appearance, perhaps. But not the emergency item we are looking for." },
-        { id: 5, label: 'Painkillers',         hint: "Painkillers — the group's unofficial mobile pharmacy",  x: 80, y: 73, punch: "Correct. Illia has apparently accepted his role as the group's unofficial mobile pharmacy. 💊" },
+        { id: 1, label: 'Blue Cubes',         hint: 'Blue cubes of speed',                                   x: 17, y: 40, punch: "Incorrect. Illia may have energy, but it is mostly powered by logistics and mild panic." },
+        { id: 2, label: 'Potato Starch',       hint: 'Potato starch',                                        x: 20, y: 67, punch: "Incorrect. Useful for cooking. Less useful during a headache." },
+        { id: 3, label: 'Green Tobacco',       hint: 'Green tobacco',                                        x: 17, y: 92, punch: "Incorrect. Wrong pocket, wrong person, wrong survival strategy." },
+        { id: 4, label: 'Electrolyte Tablets', hint: 'Electrolyte tablets that look way too suspicious',     x: 80, y: 50, punch: "Close in appearance, perhaps. But not the emergency item we are looking for." },
+        { id: 5, label: 'Painkillers',         hint: "Painkillers — the group's unofficial mobile pharmacy",  x: 80, y: 82, punch: "Correct. Illia has apparently accepted his role as the group's unofficial mobile pharmacy. 💊" },
       ],
     },
     {
