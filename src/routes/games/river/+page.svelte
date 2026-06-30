@@ -296,47 +296,77 @@
   /* ── River zone ── */
   .river-zone { flex: 1; position: relative; }
 
-  /* ── Boat ── */
+  /*
+   * ── Boat position config ──────────────────────────────────────
+   * boat-wrap.top        = distance from top of river zone (north side)
+   * boat-wrap.at-south   = distance from bottom of river zone (south side)
+   *
+   * The river zone is the middle band of the screen between the two bank
+   * overlays. Increase the px value in calc(100% - Xpx) to push the
+   * boat higher when it's on the south bank.
+   * ────────────────────────────────────────────────────────────── */
   .boat-wrap {
     position: absolute;
-    top: 4%;
+    top: 4%;                              /* ← north bank position  */
     left: 50%;
     transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
     transition: top 0.82s cubic-bezier(0.4,0,0.2,1);
   }
-  .boat-wrap.at-south { top: calc(100% - 220px); }
+  .boat-wrap.at-south { top: calc(100% - 210px); } /* ← south bank position */
 
+  /*
+   * The boat image has a white background (no alpha channel).
+   * mix-blend-mode: multiply makes white → river-water colour (transparent).
+   * brightness(1.5) compensates for the hull darkening caused by multiply.
+   * No coloured container needed — the blend works against the river map.
+   */
   .boat-dish {
     position: relative;
-    width: 184px; height: 134px;
-    background: #8dcbe8;
-    border-radius: 50%;
+    width: 164px;
+    height: 120px;          /* matches boat.png at 164px width (aspect ~1.375:1) */
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 6px 28px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,255,255,0.12);
-    overflow: hidden;
   }
-  .boat-img { width: 164px; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
+  .boat-img {
+    width: 164px;
+    mix-blend-mode: multiply;
+    filter: brightness(1.5) drop-shadow(0 3px 12px rgba(0,0,0,0.8));
+    pointer-events: none; user-select: none;
+  }
 
+  /*
+   * ── Passenger position config ─────────────────────────────────
+   * The portrait sits inside the boat hull at these coordinates.
+   * top / left are % of .boat-dish (164 × 120 px).
+   * Adjust to move the portrait to any spot on the boat image.
+   *   50% / 50% = dead centre of the boat image
+   *   55% / 50% = slightly towards the stern (bottom tip)
+   * ────────────────────────────────────────────────────────────── */
   .passenger-portrait {
-    position: absolute; bottom: 6px; right: 12px;
-    width: 58px; height: 58px;
+    position: absolute;
+    top: 50%;                             /* ← vertical position in boat   */
+    left: 50%;                            /* ← horizontal position in boat  */
+    transform: translate(-50%, -50%);
+    width: 54px; height: 54px;
     border-radius: 50%; overflow: hidden;
-    border: 2.5px solid #fff;
-    background: rgba(0,0,0,0.15);
+    border: 2.5px solid rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.2);
     cursor: pointer; padding: 0;
     display: flex; align-items: flex-end; justify-content: center;
     transition: border-color 0.15s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.6);
   }
   .passenger-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .passenger-portrait:hover { border-color: #ff6b35; }
 
   .empty-seat {
-    position: absolute; bottom: 12px; right: 12px;
-    font-size: 0.58rem; color: rgba(0,0,0,0.45);
-    background: rgba(255,255,255,0.55);
-    padding: 0.12rem 0.45rem; border-radius: 100px;
-    pointer-events: none;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.58rem; color: rgba(255,255,255,0.5);
+    border: 1px dashed rgba(255,255,255,0.3);
+    padding: 0.15rem 0.5rem; border-radius: 100px;
+    pointer-events: none; white-space: nowrap;
   }
 
   .boat-controls { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
