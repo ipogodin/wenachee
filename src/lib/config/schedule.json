@@ -14,7 +14,7 @@
     "activities": [
       { "time": "9:00 AM", "title": "Breakfast", "emoji": "🍳" },
       { "time": "12:00 PM", "title": "Hike — Huyayk or Leavenworth", "emoji": "🥾" },
-      { "time": "2:00 PM", "title": "Eblanning near the lake", "emoji": "🚴" },
+      { "time": "2:00 PM", "title": "Eblanning near the lake", "emoji": "🌴" },
       { "time": "7:00 PM", "title": "Dinner — Cotelet + potato stolovka style", "emoji": "🍽️", "note": "By Illia, Khrystyna & Sasha" },
       { "time": "9:00 PM", "title": "Campfire", "emoji": "🔥" }
     ]
@@ -53,6 +53,14 @@
       { "time": "12:00 PM", "title": "Lunch — whatever's left", "emoji": "🍽️" },
       { "time": "2:00 PM", "title": "Packing up", "emoji": "🎒" },
       { "time": "3:00 PM", "title": "Leave the campsite — safe travels!", "emoji": "👋" }
+    ]
+  },
+  {
+    "date": "2026-07-06",
+    "label": "Mon · Jul 6",
+    "activities": [
+      { "time": "8:00 AM", "title": "Breakfast & final pack up", "emoji": "🍳" },
+      { "time": "11:00 AM", "title": "Goodbye — safe travels everyone!", "emoji": "🚗" }
     ]
   }
 ]

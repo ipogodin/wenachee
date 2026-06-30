@@ -188,11 +188,11 @@
   .day-tab {
     background: rgba(255,255,255,0.08);
     border: 2px solid transparent;
-    border-radius: 12px;
+    border-radius: 14px;
     color: #fff;
     cursor: pointer;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
     font-weight: 700;
     white-space: nowrap;
     transition: all 0.2s;
@@ -200,13 +200,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.25rem;
+    min-width: 90px;
   }
 
   .tab-label { line-height: 1.2; }
 
   .tab-weather {
-    font-size: 0.7rem;
+    font-size: 0.78rem;
     font-weight: 600;
     opacity: 0.75;
   }
