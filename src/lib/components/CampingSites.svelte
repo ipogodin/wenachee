@@ -35,39 +35,7 @@
       </div>
     </div>
 
-    <!-- Site cards -->
-    <div class="site-grid">
-      {#each SITES as site}
-        <div
-          class="site-card"
-          class:highlighted={activePin === site.id}
-          style="--card-color: {site.color}"
-          role="button"
-          tabindex="0"
-          onclick={() => activePin = activePin === site.id ? null : site.id}
-          onkeydown={(e) => e.key === 'Enter' && (activePin = activePin === site.id ? null : site.id)}
-        >
-          <div class="card-top">
-            <span class="site-num" style="background: {site.color}">{site.id}</span>
-            <h3>Site {site.id}</h3>
-          </div>
-          <div class="capacity-line">
-            {#if site.capacity}
-              <span>👥 {site.capacity} people</span>
-            {:else}
-              <span class="tbd">👥 Spots TBD</span>
-            {/if}
-          </div>
-          <ul class="amenities">
-            {#each site.amenities as a}
-              <li>{a}</li>
-            {/each}
-          </ul>
-        </div>
-      {/each}
-    </div>
-
-    <!-- Directions -->
+    <!-- Directions — right after the map so it's the first action -->
     <div class="directions-block">
       <div class="directions-address">
         <span class="dir-pin">📍</span>
@@ -107,6 +75,39 @@
         </a>
       </div>
     </div>
+
+    <!-- Site cards -->
+    <div class="site-grid" style="margin-top: 2.5rem;">
+      {#each SITES as site}
+        <div
+          class="site-card"
+          class:highlighted={activePin === site.id}
+          style="--card-color: {site.color}"
+          role="button"
+          tabindex="0"
+          onclick={() => activePin = activePin === site.id ? null : site.id}
+          onkeydown={(e) => e.key === 'Enter' && (activePin = activePin === site.id ? null : site.id)}
+        >
+          <div class="card-top">
+            <span class="site-num" style="background: {site.color}">{site.id}</span>
+            <h3>Site {site.id}</h3>
+          </div>
+          <div class="capacity-line">
+            {#if site.capacity}
+              <span>👥 {site.capacity} people</span>
+            {:else}
+              <span class="tbd">👥 Spots TBD</span>
+            {/if}
+          </div>
+          <ul class="amenities">
+            {#each site.amenities as a}
+              <li>{a}</li>
+            {/each}
+          </ul>
+        </div>
+      {/each}
+    </div>
+
   </div>
 </section>
 

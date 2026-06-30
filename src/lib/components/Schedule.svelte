@@ -103,7 +103,7 @@
         rel="noopener noreferrer"
         class="doc-link"
       >
-        📄 Full official schedule — rooms, meals & cooking duties
+        📄 Full official schedule — campsites, meals & cooking duties
       </a>
     </div>
   </div>
