@@ -35,49 +35,8 @@
       </div>
     </div>
 
-    <!-- Directions — right after the map so it's the first action -->
-    <div class="directions-block">
-      <div class="directions-address">
-        <span class="dir-pin">📍</span>
-        <div>
-          <strong>Lake Wenatchee State Park — North Campground</strong>
-          <span>21588 WA-207, Leavenworth, WA 98826</span>
-        </div>
-      </div>
-      <div class="directions-btns">
-        <a
-          href="https://www.google.com/maps/dir/?api=1&destination=47.811871,-120.724083"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="dir-card google"
-        >
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          <span class="dir-card-label">
-            <span class="dir-card-title">Google Maps</span>
-            <span class="dir-card-sub">Tap to navigate →</span>
-          </span>
-        </a>
-        <a
-          href="https://maps.apple.com/?daddr=47.811871,-120.724083&dirflg=d"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="dir-card apple"
-        >
-          <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-          </svg>
-          <span class="dir-card-label">
-            <span class="dir-card-title">Apple Maps</span>
-            <span class="dir-card-sub">Tap to navigate →</span>
-          </span>
-        </a>
-      </div>
-    </div>
-
     <!-- Site cards -->
-    <div class="site-grid" style="margin-top: 2.5rem;">
+    <div class="site-grid">
       {#each SITES as site}
         <div
           class="site-card"
@@ -304,80 +263,4 @@
     border-radius: 100px;
   }
 
-  /* Directions */
-  .directions-block {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .directions-address {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.85rem;
-    opacity: 0.75;
-  }
-
-  .dir-pin { font-size: 1.2rem; flex-shrink: 0; }
-
-  .directions-address div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-
-  .directions-address strong { color: #fff; opacity: 1; font-size: 0.9rem; }
-  .directions-address span  { opacity: 0.6; font-size: 0.78rem; }
-
-  .directions-btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-  }
-
-  .dir-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border-radius: 16px;
-    text-decoration: none;
-    color: #fff;
-    font-weight: 700;
-    transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
-    border: 2px solid transparent;
-  }
-
-  .dir-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
-    filter: brightness(1.1);
-  }
-
-  .dir-card:active { transform: translateY(0); }
-
-  .dir-card.google {
-    background: linear-gradient(135deg, #4285f4, #2b6de8);
-    border-color: rgba(255,255,255,0.15);
-  }
-
-  .dir-card.apple {
-    background: linear-gradient(135deg, #3a3a3c, #1c1c1e);
-    border-color: rgba(255,255,255,0.15);
-  }
-
-  .dir-card-label {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-
-  .dir-card-title { font-size: 1rem; font-weight: 800; }
-  .dir-card-sub   { font-size: 0.72rem; opacity: 0.75; font-weight: 600; letter-spacing: 0.02em; }
-
-  @media (max-width: 500px) {
-    .directions-btns { grid-template-columns: 1fr; }
-  }
 </style>
