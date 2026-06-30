@@ -14,7 +14,7 @@
     "activities": [
       { "time": "9:00 AM", "title": "Breakfast", "emoji": "🍳" },
       { "time": "12:00 PM", "title": "Hike — Huyayk or Leavenworth", "emoji": "🥾" },
-      { "time": "2:00 PM", "title": "E-biking near the lake", "emoji": "🚴" },
+      { "time": "2:00 PM", "title": "Eblanning near the lake", "emoji": "🚴" },
       { "time": "7:00 PM", "title": "Dinner — Cotelet + potato stolovka style", "emoji": "🍽️", "note": "By Illia, Khrystyna & Sasha" },
       { "time": "9:00 PM", "title": "Campfire", "emoji": "🔥" }
     ]

@@ -96,11 +96,44 @@
       {/each}
     </div>
 
-    <p class="edit-hint">✏️ Edit activities in <code>src/lib/config/schedule.json</code></p>
+    <div class="doc-link-row">
+      <a
+        href="https://docs.google.com/document/d/1vNnGBEtKF71I29vrag9UDfkMrorQFg4U6sefSFVJ1Sg/edit"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="doc-link"
+      >
+        📄 Full official schedule — rooms, meals & cooking duties
+      </a>
+    </div>
   </div>
 </section>
 
 <style>
+  .doc-link-row {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .doc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .doc-link:hover {
+    background: rgba(255,107,53,0.15);
+    border-color: #ff6b35;
+    color: #fff;
+  }
+
   .schedule-section {
     background: #1a1a2e;
     padding: 5rem 1.5rem;
