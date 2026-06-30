@@ -12,48 +12,47 @@
     "date": "2026-07-02",
     "label": "Thu · Jul 2",
     "activities": [
-      { "time": "8:00 AM", "title": "Breakfast", "emoji": "🍳" },
-      { "time": "10:00 AM", "title": "River Float", "emoji": "🛶", "note": "Bring your floaty" },
-      { "time": "3:00 PM", "title": "Free Time / Swim", "emoji": "🏊" },
-      { "time": "7:00 PM", "title": "Dinner & Campfire Stories", "emoji": "🔥" }
+      { "time": "9:00 AM", "title": "Breakfast", "emoji": "🍳" },
+      { "time": "12:00 PM", "title": "Hike — Huyayk or Leavenworth", "emoji": "🥾" },
+      { "time": "2:00 PM", "title": "E-biking near the lake", "emoji": "🚴" },
+      { "time": "7:00 PM", "title": "Dinner — Cotelet + potato stolovka style", "emoji": "🍽️", "note": "By Illia, Khrystyna & Sasha" },
+      { "time": "9:00 PM", "title": "Campfire", "emoji": "🔥" }
     ]
   },
   {
     "date": "2026-07-03",
     "label": "Fri · Jul 3",
     "activities": [
-      { "time": "8:00 AM", "title": "Breakfast", "emoji": "🍳" },
-      { "time": "10:00 AM", "title": "Hiking — Dirtyface Peak Trail", "emoji": "🥾" },
-      { "time": "4:00 PM", "title": "Lake Kayaking", "emoji": "🚣" },
-      { "time": "8:00 PM", "title": "4th of July Eve Campfire", "emoji": "🔥" }
+      { "time": "8:00 AM", "title": "Breakfast — eggs, bacon & sausage", "emoji": "🥓" },
+      { "time": "10:00 AM", "title": "Floating down the river", "emoji": "🛶", "note": "See river map" },
+      { "time": "12:00 PM", "title": "Mid-river lunch — snacks, sandwiches, nuts", "emoji": "🥪" },
+      { "time": "4:00 PM", "title": "Drying clothes", "emoji": "👕" },
+      { "time": "6:30 PM", "title": "Dinner — Chicken + salad", "emoji": "🍗", "note": "By Lora & Ivanka" },
+      { "time": "8:00 PM", "title": "Charades / Crocodil", "emoji": "🎭" },
+      { "time": "9:00 PM", "title": "Campfire", "emoji": "🔥" }
     ]
   },
   {
     "date": "2026-07-04",
     "label": "Sat · Jul 4 🎆",
     "activities": [
-      { "time": "9:00 AM", "title": "Big Breakfast Cookout", "emoji": "🥞" },
-      { "time": "1:00 PM", "title": "Lake Day — Kayaks & Paddleboards", "emoji": "🏄" },
-      { "time": "6:00 PM", "title": "BBQ & 4th of July Feast", "emoji": "🍖" },
-      { "time": "9:30 PM", "title": "Stargazing on the Lake", "emoji": "🌌", "note": "No fireworks — Stage 1 restrictions in place" }
+      { "time": "8:00 AM", "title": "Breakfast — constitutional yogurt, oatmeal & sandwich", "emoji": "🥣" },
+      { "time": "10:00 AM", "title": "Floating down the river — with firearms", "emoji": "🇺🇸", "note": "See river map · 2nd Amendment float" },
+      { "time": "12:00 PM", "title": "Mid-river lunch of the 1st Amendment — snacks, sandwiches, nuts", "emoji": "🥪" },
+      { "time": "4:00 PM", "title": "Drying clothes", "emoji": "👕" },
+      { "time": "6:30 PM", "title": "Dinner — Hotdogs & chili of freedom", "emoji": "🌭", "note": "By Sergii & Nastia" },
+      { "time": "8:00 PM", "title": "Board games", "emoji": "🎲" },
+      { "time": "9:00 PM", "title": "Campfire", "emoji": "🔥" }
     ]
   },
   {
     "date": "2026-07-05",
     "label": "Sun · Jul 5",
     "activities": [
-      { "time": "9:00 AM", "title": "Slow Morning / Coffee", "emoji": "☕" },
-      { "time": "11:00 AM", "title": "River Float — Chill Day", "emoji": "🛶" },
-      { "time": "3:00 PM", "title": "Volleyball & Lawn Games", "emoji": "🏐" },
-      { "time": "7:00 PM", "title": "Last Big Campfire", "emoji": "🔥" }
-    ]
-  },
-  {
-    "date": "2026-07-06",
-    "label": "Mon · Jul 6",
-    "activities": [
-      { "time": "8:00 AM", "title": "Breakfast & Pack Up", "emoji": "🍳" },
-      { "time": "11:00 AM", "title": "Goodbye — Safe Travels!", "emoji": "👋" }
+      { "time": "8:00 AM", "title": "Breakfast — eggs, bacon & sausage", "emoji": "🥓" },
+      { "time": "12:00 PM", "title": "Lunch — whatever's left", "emoji": "🍽️" },
+      { "time": "2:00 PM", "title": "Packing up", "emoji": "🎒" },
+      { "time": "3:00 PM", "title": "Leave the campsite — safe travels!", "emoji": "👋" }
     ]
   }
 ]
