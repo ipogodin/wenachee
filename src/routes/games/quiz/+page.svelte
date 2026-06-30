@@ -5,8 +5,9 @@
 
   const debug = $derived($page.url.searchParams.has('debug'));
 
-  const TIME_PER_Q = QUIZ.timePerQuestion ?? 30;
-  const PTS_PER_Q  = QUIZ.pointsPerQuestion ?? 10;
+  const TIME_PER_Q   = QUIZ.timePerQuestion ?? 30;
+  const PTS_PER_Q    = QUIZ.pointsPerQuestion ?? 10;
+  const PUNCH_DELAY  = 3500;
 
   // ── Audio ──────────────────────────────────────────────────────
   let theme;
@@ -65,9 +66,9 @@
   }
 
   function debugOrder(arr) {
-    const mom = arr.find(q => q.id === 'mom1');
-    const rest = arr.filter(q => q.id !== 'mom1');
-    return mom ? [mom, ...rest] : arr;
+    const anya = arr.find(q => q.id === 'anya1');
+    const rest = arr.filter(q => q.id !== 'anya1');
+    return anya ? [anya, ...rest] : arr;
   }
 
   let questions     = $state(debug ? debugOrder(QUIZ.questions) : shuffled(QUIZ.questions));
@@ -80,6 +81,7 @@
   let hoveredOpt    = $state(null);
   let points        = $state(0);
   let punchText     = $state('');
+  let failMessage   = $state('');   // shown on the game over card
 
   let q            = $derived(questions[questionIndex]);
   let hotspotSize  = $derived(q.hotspotSize ?? 21);
@@ -118,24 +120,27 @@
     hoveredOpt = null;
 
     const opt = q.options.find(o => o.id === optId);
-    punchText = opt?.punch ?? '';
 
     if (optId === q.correctAnswer) {
       result = 'correct';
+      punchText = opt?.punch ?? '';
       points += PTS_PER_Q;
-      setTimeout(advance, 1800);
+      setTimeout(advance, PUNCH_DELAY);
     } else {
       result = 'wrong';
+      punchText = opt?.punch ?? '';
+      failMessage = punchText;
       playFail();
-      setTimeout(() => { status = 'lost'; theme?.pause(); }, 1800);
+      setTimeout(() => { status = 'lost'; theme?.pause(); }, PUNCH_DELAY);
     }
   }
 
   function handleTimeout() {
     result = 'timeout';
     punchText = q.timeoutMessage ?? "Time's up!";
+    failMessage = punchText;
     playFail();
-    setTimeout(() => { status = 'lost'; theme?.pause(); }, 1800);
+    setTimeout(() => { status = 'lost'; theme?.pause(); }, PUNCH_DELAY);
   }
 
   function advance() {
@@ -160,6 +165,7 @@
     selected = null;
     result = null;
     punchText = '';
+    failMessage = '';
     timeLeft = TIME_PER_Q;
     status = 'intro';
     hoveredOpt = null;
@@ -189,6 +195,9 @@
 
 <svelte:head>
   <title>Camp Quiz · Wenatchee 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet" />
 </svelte:head>
 
 <nav class="top-nav">
@@ -234,13 +243,19 @@
           {#if debug}<span class="hs-debug-label">{opt.x},{opt.y}</span>{/if}
         </button>
       {/each}
+
+      {#if punchText}
+        <div class="punch-overlay" class:punch-overlay-correct={result === 'correct'} class:punch-overlay-wrong={result === 'wrong' || result === 'timeout'}>
+          <span class="punch-comic">{punchText}</span>
+        </div>
+      {/if}
     </div>
   </div>
 
   <!-- Hint / punch strip -->
   <div class="hint-strip">
     {#if punchText}
-      <span class="punch-text" class:punch-correct={result === 'correct'} class:punch-wrong={result === 'wrong' || result === 'timeout'}>{punchText}</span>
+      <span class="hint-idle">Next question loading…</span>
     {:else if hoveredHint}
       <span class="hint-text">💬 {hoveredHint}</span>
     {:else if result === null}
@@ -253,10 +268,13 @@
 {#if status === 'intro'}
   <div class="end-overlay">
     <div class="end-card intro-card">
-      <div class="end-icon bob">🎯</div>
-      <h2 class="intro-title">Camp Quiz</h2>
-      <p class="intro-sub">How well do you know the crew?<br>Tap the right circle before time runs out.</p>
-      <button class="pill primary big" onclick={startGame}>Let's Go! →</button>
+      <div class="end-icon bob">⚠️</div>
+      <h2 class="intro-title">Attention</h2>
+      <p class="intro-sub">This quiz can be offensive.</p>
+      <div class="end-actions intro-actions">
+        <button class="pill primary big" onclick={startGame}>I am ready to be offended</button>
+        <a href="/games" class="pill big ua-pill">я сьогодні обіженка</a>
+      </div>
     </div>
   </div>
 {/if}
@@ -286,6 +304,9 @@
     <div class="end-card lost-card">
       <div class="end-icon">💀</div>
       <h2>Game Over</h2>
+      {#if failMessage}
+        <p class="fail-message">{failMessage}</p>
+      {/if}
       {#if points > 0}
         <div class="points-display">
           <span class="pts-num">+{points}</span>
@@ -377,6 +398,44 @@
   @keyframes flash-red   { 40% { box-shadow: inset 0 0 0 6px #ff4444, 0 0 30px rgba(255,68,68,0.4);  } }
 
   .quiz-img { width: 100%; height: 100%; display: block; object-fit: fill; user-select: none; }
+
+  /* ── Punch overlay ── */
+  .punch-overlay {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+    pointer-events: none;
+    animation: punch-overlay-in 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  .punch-overlay-correct { background: rgba(6,214,160,0.15); }
+  .punch-overlay-wrong   { background: rgba(255,68,68,0.12); }
+
+  .punch-comic {
+    font-family: 'Bangers', 'Impact', cursive;
+    font-size: clamp(1.6rem, 5cqw, 3.2rem);
+    letter-spacing: 0.04em;
+    text-align: center;
+    line-height: 1.2;
+    max-width: 80%;
+    padding: 0.6rem 1.2rem;
+    border-radius: 16px;
+    animation: punch-text-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.05s both;
+  }
+  .punch-overlay-correct .punch-comic {
+    color: #06d6a0;
+    text-shadow: 0 0 30px rgba(6,214,160,0.7), 2px 2px 0 rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.55);
+    border: 2px solid rgba(6,214,160,0.4);
+  }
+  .punch-overlay-wrong .punch-comic {
+    color: #ff6b6b;
+    text-shadow: 0 0 30px rgba(255,68,68,0.7), 2px 2px 0 rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.55);
+    border: 2px solid rgba(255,68,68,0.4);
+  }
+
+  @keyframes punch-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes punch-text-pop   { from { opacity: 0; transform: scale(0.5) rotate(-4deg); } to { opacity: 1; transform: scale(1) rotate(0deg); } }
 
   /* ── Hotspots ── */
   .hotspot {
@@ -484,12 +543,23 @@
   .intro-card { border-color: rgba(6,214,160,0.35); }
   .intro-title { margin: 0 0 0.5rem; font-size: 1.7rem; font-weight: 900; color: #06d6a0; text-shadow: 0 0 20px rgba(6,214,160,0.4); }
   .intro-sub { opacity: 0.7; font-size: 0.88rem; line-height: 1.5; margin: 0 0 1.6rem; }
+  .intro-actions { flex-direction: column; align-items: center; gap: 0.6rem; }
   .pill.big { padding: 0.7rem 2.2rem; font-size: 1rem; }
+  .ua-pill { background: rgba(255,213,0,0.12); border-color: rgba(255,213,0,0.3); color: rgba(255,255,255,0.55); font-size: 0.85rem; }
+  .ua-pill:hover { background: rgba(255,213,0,0.2); color: rgba(255,255,255,0.8); }
 
   .end-icon { font-size: 3rem; margin-bottom: 0.5rem; }
   .win-card h2  { margin: 0 0 0.4rem; font-size: 1.5rem; font-weight: 900; color: #06d6a0; }
   .lost-card h2 { margin: 0 0 0.4rem; font-size: 1.5rem; font-weight: 900; color: #ff6b6b; }
   .end-card p   { opacity: 0.7; font-size: 0.88rem; margin: 0 0 1rem; }
+  .fail-message {
+    font-family: 'Bangers', 'Impact', cursive;
+    font-size: 1.1rem; letter-spacing: 0.03em;
+    color: #ff6b6b; opacity: 1 !important;
+    background: rgba(255,68,68,0.1); border: 1px solid rgba(255,68,68,0.25);
+    border-radius: 12px; padding: 0.6rem 1rem;
+    margin: 0 0 0.8rem; line-height: 1.35;
+  }
 
   .points-display {
     display: flex; flex-direction: column; align-items: center;

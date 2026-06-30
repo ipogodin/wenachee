@@ -67,6 +67,19 @@ export const QUIZ = {
       ],
     },
     {
+      id: 'anya1',
+      image: '/quiz/wen_quiz_anya1.png',
+      correctAnswer: 1,
+      timeoutMessage: "The sacred being has grazed away. Anya is disappointed in you.",
+      options: [
+        { id: 1, label: 'Cow',          hint: "This is a cow",              x: 17, y: 37, punch: "You are smart. Keep an eye on your horse at all times." },
+        { id: 2, label: 'Xi Jinping',   hint: "Are we in Taiwan already?",              x: 16, y: 78, punch: "Those are Zuckerberg's favorite people." },
+        { id: 3, label: 'AK-47',        hint: "A practical choice for the Pacific Northwest",            x: 38, y: 90, punch: "Although it would probably serve her better in Washington State." },
+        { id: 4, label: 'Swamp',        hint: "Habitat of species that like to fight with everyone",                               x: 62, y: 86, punch: "Anya has not been to Swampland in a while. Donate to the Armed Forces of Ukraine to help shrink the swamp." },
+        { id: 5, label: 'Pile of Cash', hint: "Most trusted paper in the world",                          x: 87, y: 78, punch: "But Americans are generally nice people." },
+      ],
+    },
+    {
       id: 'sergii1',
       image: '/quiz/wen_quiz_sergii_1.png',
       correctAnswer: 2,
