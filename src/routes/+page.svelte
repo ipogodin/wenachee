@@ -25,9 +25,27 @@
   <a href="/games" class="games-link">🎮 Games</a>
 </nav>
 
+<!-- Trip over banner -->
+<div class="trip-over-banner">
+  <div class="trip-over-inner">
+    <p class="trip-over-eyebrow">⛺ July 1–5, 2026 · Lake Wenatchee</p>
+    <h2 class="trip-over-heading">That's a wrap. Thanks everyone for an incredible trip! 🙌</h2>
+    <p class="trip-over-sub">Share your photos, add yours, and relive the chaos.</p>
+    <a
+      href="https://photos.app.goo.gl/gyWN2oEajnTcqiNbA"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="trip-over-btn"
+    >
+      <span>📸 Open Photo Album</span>
+      <span class="trip-over-arrow">→</span>
+    </a>
+  </div>
+</div>
+
 <Hero />
 
-<!-- Directions — first thing after hero -->
+<!-- Directions -->
 <div class="directions-block">
   <div class="directions-address">
     <span class="dir-pin">📍</span>
@@ -95,7 +113,7 @@
 <FloatRules />
 
 <footer class="site-footer">
-  <p>⛺ Wenatchee Lake Camp 2026 · See you there!</p>
+  <p>⛺ Wenatchee Lake Camp 2026 · See you next time!</p>
 </footer>
 
 <style>
@@ -140,6 +158,66 @@
     background: rgba(6,214,160,0.15);
     color: #06d6a0;
   }
+
+  /* ── Trip over banner ── */
+  .trip-over-banner {
+    background: linear-gradient(135deg, #0d2137 0%, #0a1628 100%);
+    border-top: 3px solid #ffd23f;
+    border-bottom: 1px solid rgba(255,210,63,0.15);
+    padding: 5rem 1.5rem 3rem;
+    text-align: center;
+    color: #fff;
+  }
+  .trip-over-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .trip-over-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #ffd23f;
+    margin: 0;
+    opacity: 0.9;
+  }
+  .trip-over-heading {
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 900;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .trip-over-sub {
+    font-size: 0.95rem;
+    opacity: 0.6;
+    margin: 0;
+  }
+  .trip-over-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+    background: #ffd23f;
+    color: #0d1b2a;
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(255,210,63,0.35);
+  }
+  .trip-over-btn:hover {
+    background: #f5c800;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255,210,63,0.5);
+  }
+  .trip-over-arrow { font-size: 1.1rem; transition: transform 0.15s; }
+  .trip-over-btn:hover .trip-over-arrow { transform: translateX(4px); }
 
   /* ── Directions ── */
   .directions-block {
